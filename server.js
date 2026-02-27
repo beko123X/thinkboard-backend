@@ -43,7 +43,15 @@ app.get('/api', (req, res) => {
     });
 });
 
+// Health check مهم جداً لـ Pxxl
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
+});
 
+// أو مسار أبسط
+app.get('/health', (req, res) => {
+    res.send('OK');
+});
 
 app.use("/api/notes", notesRoutes)
 
@@ -65,6 +73,15 @@ app.use('*', (req, res) => {
             '/api/notes'
         ]
     });
+});
+
+// قبل app.listen
+process.on('uncaughtException', (error) => {
+    console.error('Uncaught Exception:', error);
+});
+
+process.on('unhandledRejection', (error) => {
+    console.error('Unhandled Rejection:', error);
 });
 // Connect to MongoDB but don't block server start
 connectDB()
