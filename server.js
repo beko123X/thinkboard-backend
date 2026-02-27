@@ -18,8 +18,14 @@ const HOST = '0.0.0.0';
 // Cors Security 
 app.use(
     cors({
-        origin: "http://localhost:5173",
-    }))
+        origin: [
+            "http://localhost:5173",
+            "http://localhost:5174",
+            "http://localhost:3000",
+            "https://thinkboard-frontend.pxxl.click" // للـ production
+        ],
+        credentials: true
+        }));
 
 //Middleware will pass JSON bodies: req.body
 app.use(express.json());
@@ -48,10 +54,7 @@ app.get('/health', (req, res) => {
     res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
-// أو مسار أبسط
-app.get('/health', (req, res) => {
-    res.send('OK');
-});
+
 
 app.use("/api/notes", notesRoutes)
 
