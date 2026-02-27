@@ -22,11 +22,12 @@ app.use(
             "http://localhost:5173",
             "http://localhost:5174",
             "http://localhost:3000",
-            "https://thinkboard-frontend.pxxl.click" // للـ production
+            "https://beko123x.github.io",  // ✅ أضف هذا
+            "https://beko123x.github.io/thinkboard_website" // أو هذا إذا لزم
         ],
         credentials: true
-        }));
-
+    })
+)
 //Middleware will pass JSON bodies: req.body
 app.use(express.json());
 
